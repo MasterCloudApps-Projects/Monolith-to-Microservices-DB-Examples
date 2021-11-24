@@ -24,9 +24,9 @@ In Figure 4-8, our new Invoicing service needs to access a variety of informatio
 
 ## Our Example
 
-This is a very simple SpringBoot project to manage Employee Data. 
+This is a very simple SpringBoot project to manage Employee Data. We can find, add, update or delete employee data. We use JPA like ORM for storing, accessing, and managing Java objects in a Mysql database.
 
-- In the v1, we have an Invoice Service get Employee Data from the Monolith DB through an employee endpoint:
+- In the v1, we have an Invoice Service get Employee Data from the Monolith DB through an employee endpoint. From the endpoint, I can execute CRUD operations. The "Monolith Schema" has an EMPLOYEE table with four fields: BIRTH_DATE, DOCUMENT, LAST_NAME, NAME. When the application start, we are going to insert some data in the employee table.
 
 ![database view](images/AggregateExposingMonolith.jpg)
 

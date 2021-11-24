@@ -15,7 +15,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<name>Monolith</name>
-	<description>Monolith call to Employee Service</description>
+	<description>Monolith call to Finance bbd</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

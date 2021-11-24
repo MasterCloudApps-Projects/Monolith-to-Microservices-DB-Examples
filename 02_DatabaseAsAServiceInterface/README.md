@@ -26,13 +26,13 @@ Sometimes, clients just need a database to query. In these situations, allowing 
 
 ## Our Example
 
-This is a very simple SpringBoot project to manage orders. 
+This is a very simple SpringBoot project to manage orders. We can find, add, update or delete orders. We use JPA like ORM for storing, accessing, and managing Java objects in a Mysql database.
 
-- In the v1, we have an external consumer read and write data from API endpoint from the Order service:
+- In the v1, we have two services, (Order Service and an external consumer service) The "Order Service" can execute CRUD operations while from the "External Consumer Service" can read and write data from API endpoint from the "Order service".  The "Order Schema" has an ORDER table with four fields: DATE_ORDER, PURCHASER, ADDRESS, TOTAL_PRICE to register the orders.
 
 ![database view_v1](images/DatabaseAsAService_v1.jpg)
 
-- In the v2, we have an external consumer that write data from API endpoint from the Order service and read data from the external DB repository. The Internal Order DB and the External DB are syncronized by a CDC (Debezium)
+- In the v2, we have two services, (Order Service and an external consumer service). We have an external consumer that write data from API endpoint from the Order service and read data from the external DB repository. The Internal Order DB and the External DB are syncronized by a CDC (Debezium). For this case, we are going to synchronize two mysql databases and the Orders table.
 
 ![database view_v2](images/DatabaseAsAService_v2.jpg)
 
@@ -44,38 +44,39 @@ We are going to user a Docker compose file to deploy the examples:
 - In the v1 version we are going to deploy the database, and the v1 of the order and the externalconsumer service. Both services  will be hosted on dockerhub and will be deploy with a docker-compose file:
 
 '
+
 	version: '3.9'
 	services:
-	order:
-		image: dreyg/database_as_a_service_order_v1
-		ports:
-		- 8080:8080
-		environment:
-		# Enviroment variables for connect to MySQL
-		- MYSQL_HOST=mysql
-		depends_on:
-		- mysql
-		restart: on-failure
+		order:
+			image: dreyg/database_as_a_service_order_v1
+			ports:
+			- 8080:8080
+			environment:
+			# Enviroment variables for connect to MySQL
+			- MYSQL_HOST=mysql
+			depends_on:
+			- mysql
+			restart: on-failure
 
-	externalconsumer:
-		image: dreyg/database_as_a_service_external_consumer_v1
-		ports:
-		- 8090:8090
-		environment:
-		- HOST=order
-		restart: on-failure
+		externalconsumer:
+			image: dreyg/database_as_a_service_external_consumer_v1
+			ports:
+			- 8090:8090
+			environment:
+			- HOST=order
+			restart: on-failure
 
-	mysql:
-		image: mysql:8.0.25
-		ports:
-		- 3306:3306
-		environment:
-		# Enviroment variables for securize MySQL and create default Database
-		- MYSQL_DATABASE=order
-		- MYSQL_ROOT_PASSWORD=pass
-		volumes:
-		- ./mysql_db:/var/lib/mysql
-		restart: always
+		mysql:
+			image: mysql:8.0.25
+			ports:
+			- 3306:3306
+			environment:
+			# Enviroment variables for securize MySQL and create default Database
+			- MYSQL_DATABASE=order
+			- MYSQL_ROOT_PASSWORD=pass
+			volumes:
+			- ./mysql_db:/var/lib/mysql
+			restart: always
 
 
 

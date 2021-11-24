@@ -21,9 +21,9 @@ On the face of it, these seem pretty straightforward. When the table is owned by
 
 ## Our Example
 
-This is a very simple SpringBoot project to manage the customer's status. 
+This is a very simple SpringBoot project to manage the customer's status.  We use JPA like ORM for storing, accessing, and managing Java objects in a Mysql database.
 
-- In the v1, we have a monolith with two controllers (finance and cutomer) to change the status of the customer:
+- In the v1, we have a monolith with two controllers (finance and cutomer) to change the status of the customer. The "Customer Managment Schema" has an CUSTOMER table with 3 fields: ID, NAME, STATUS. When the application start, we are going to insert some data in the customer table.
 
 ![database view](images/v1.jpeg)
 
