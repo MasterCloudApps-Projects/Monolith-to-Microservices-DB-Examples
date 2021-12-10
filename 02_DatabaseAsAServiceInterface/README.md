@@ -200,3 +200,10 @@ The conector-mysql.json has the configuration for the connector:
     "database.history.kafka.topic": "schema-changes.order"
   }
 }
+
+
+To start the example we will use:
+
+' 
+
+    docker-compose up

@@ -127,3 +127,10 @@ We are going to user a Docker compose file to deploy the examples:
             depends_on:
             - mysql
             restart: on-failure
+
+
+To start the example we will use:
+
+' 
+
+    docker-compose up
