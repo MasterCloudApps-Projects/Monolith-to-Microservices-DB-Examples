@@ -25,14 +25,20 @@ public class EventListener {
 			containerFactory = "kafkaListenerContainerFactory"
 	)
 
-		public void listenEvents(Event event){
-		if (Objects.nonNull(event.getPayload().getSource())){
+		public void listenEvents(Event event) {
+		if (Objects.nonNull(event.getPayload().getSource())) {
 			log.info("New event consumed successfully");
 			log.info("Event= " + event.toString());
 			integrationService.processKafkaEvent(event);
-		}else{
+		} else {
 			log.error("The event has been discarded for not having the expected information");
 		}
 	}
 
+		public void listenEventsString(String event){
+				log.info("New event 2 consumed successfully");
+				log.info("Event= " + event.toString());
+		}
 }
+
+
